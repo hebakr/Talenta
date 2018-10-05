@@ -13,17 +13,14 @@ namespace Talenta.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
+        public ActionResult Reports()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult CreateOrder()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

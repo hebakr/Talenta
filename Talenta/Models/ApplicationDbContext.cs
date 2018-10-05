@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Talenta.Models.Entities;
 
 namespace Talenta.Models
 {
@@ -18,12 +19,20 @@ namespace Talenta.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
+
         }
+
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<LineItem> LineItems { get; set; }
+        public DbSet<Product> Products { get; set; }
+
+
 
         public static ApplicationDbContext Create()
         {
