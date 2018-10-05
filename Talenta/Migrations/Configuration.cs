@@ -33,15 +33,15 @@ namespace Talenta.Migrations
             //var products = jss.Deserialize<List<Product>>(productsJson);
             //context.Products.AddRange(products);
 
-            var vendorsJson =
-                System.IO.File.ReadAllText(@"E:\2018\Talenica\Talenta\Talenta\Content\json\vendors.json");
+            //var vendorsJson =
+            //    System.IO.File.ReadAllText(@"E:\2018\Talenica\Talenta\Talenta\Content\json\vendors.json");
 
 
 
-            var vendors = jss.Deserialize<List<Vendor>>(vendorsJson);
-            context.Vendors.AddRange(vendors);
+            //var vendors = jss.Deserialize<List<Vendor>>(vendorsJson);
+            //context.Vendors.AddRange(vendors);
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
 
         }

@@ -8,5 +8,6 @@ namespace Talenta.Models.Entities
         public int Quantity { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual Product Product { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

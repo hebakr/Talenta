@@ -1,37 +1,43 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IList<Talenta.Models.Entities.PurchaseOrder>
+@{
+    ViewBag.Title = "Purchase Orders";
 }
 
-<h2>
-    Purchase Orders
-</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h2>
+            Purchase Orders
+        </h2>
+
+    </div>
+    <div class="col-md-6 text-right">
+        <br />
+        <p>
+            <a href="@Url.Action("CreateOrder")" class="btn btn-default">Create New Order</a>
+
+        </p>
+    </div>
+</div>
 <hr />
 
 <table class="table">
     <tr>
-        <th> Order number</th>
-        <th>Order date</th>
+        <th>Order #</th>
         <th>Vendor</th>
+        <th>Order date</th>
         <th>
-            
+            Order Amount
         </th>
     </tr>
+    @foreach (var order in Model)
+    {
     <tr>
-        <td>POR-0001</td>
-        <td>@DateTime.Now.AddDays(-25)</td>
-        <td>Vendor 1</td>
-        <td></td>
+        <td>@($"POR-{order.Id:0000}") </td>
+        <td>@order.Vendor.Name</td>
+        <td>@order.DateTime.ToShortDateString()</td>
+        <td>
+            @order.Subtotal.ToString("C")
+        </td>
     </tr>
-    <tr>
-        <td>POR-0001</td>
-        <td>@DateTime.Now.AddDays(-55)</td>
-        <td>Vendor 2</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>POR-0001</td>
-        <td>@DateTime.Now.AddDays(-42)</td>
-        <td>Vendor 1</td>
-        <td></td>
-    </tr>
+    }
 </table>

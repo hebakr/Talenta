@@ -1,15 +1,18 @@
-﻿
+﻿@model Talenta.Models.CreateOrderViewModel
+
 @{
     ViewBag.Title = "Create";
 }
-<div ng-app>
+<div ng-app="order-app">
     <h2>New Order</h2>
-    {{10+10}}
+    <hr />
+    <create-order model="@Model.ToJson()"></create-order>
 </div>
 
 
 @section scripts
 {
-
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/components/app.js"></script>
+    <script src="~/Scripts/components/createOrder.controller.js"></script>
 }

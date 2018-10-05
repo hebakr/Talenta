@@ -1,8 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Talenta.Models;
+using Talenta.Models.Dto;
+using Talenta.Models.Entities;
 
 namespace Talenta.Controllers
 {
@@ -10,7 +13,15 @@ namespace Talenta.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new ApplicationDbContext();
+
+            var orders = db.PurchaseOrders
+                .Include(x => x.Items)
+                .Include(x => x.Vendor)
+                .OrderByDescending(o => o.DateTime)
+                .ToList(); 
+
+            return View(orders);
         }
 
 
@@ -21,7 +32,43 @@ namespace Talenta.Controllers
 
         public ActionResult CreateOrder()
         {
-            return View();
+            var db = new ApplicationDbContext();
+            var model = new CreateOrderViewModel
+            {
+                Products = db.Products.OrderBy(p => p.Title).ToList(),
+                Vendors = db.Vendors.OrderBy(p => p.Name).ToList()
+            };
+            return View(model);
         }
+
+        [HttpPost]
+        public ActionResult CreateOrder(CreateOrderDto input)
+        {
+            var order = new PurchaseOrder
+            {
+                DateTime = input.Date,
+                VendorId = input.VendorId,
+                Discount = input.Discount,
+                Items = new List<LineItem>()
+            };
+
+            input.Items.ForEach(x =>
+            {
+                order.Items.Add(new LineItem
+                {
+                    ProductId = x.ProductId,
+                    Quantity = x.Quantity,
+                    UnitPrice = x.UnitPrice
+                });
+            });
+
+            var db = new ApplicationDbContext();
+
+            db.PurchaseOrders.Add(order);
+            db.SaveChanges();
+            
+            return Json(new { sucess = true });
+        }
+
     }
 }

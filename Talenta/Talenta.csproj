@@ -194,6 +194,14 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Migrations\201810052212328_LineItemUnitPrice.cs" />
+    <Compile Include="Migrations\201810052212328_LineItemUnitPrice.Designer.cs">
+      <DependentUpon>201810052212328_LineItemUnitPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dto\LineItemDto.cs" />
+    <Compile Include="Models\Dto\CreateOrderDto.cs" />
+    <Compile Include="JsonExtensions.cs" />
+    <Compile Include="Models\CreateOrderViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +209,10 @@
     <Compile Include="Migrations\201810051908460_InitialEntities.cs" />
     <Compile Include="Migrations\201810051908460_InitialEntities.Designer.cs">
       <DependentUpon>201810051908460_InitialEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810052056102_OrderDiscount.cs" />
+    <Compile Include="Migrations\201810052056102_OrderDiscount.Designer.cs">
+      <DependentUpon>201810052056102_OrderDiscount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -234,6 +246,9 @@
     <Content Include="Content\json\products.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\components\app.js" />
+    <Content Include="Scripts\components\createOrder.component.html" />
+    <Content Include="Scripts\components\createOrder.controller.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -282,6 +297,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810051908460_InitialEntities.resx">
       <DependentUpon>201810051908460_InitialEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810052056102_OrderDiscount.resx">
+      <DependentUpon>201810052056102_OrderDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810052212328_LineItemUnitPrice.resx">
+      <DependentUpon>201810052212328_LineItemUnitPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
