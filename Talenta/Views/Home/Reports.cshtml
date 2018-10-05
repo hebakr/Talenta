@@ -1,5 +1,63 @@
-﻿@{
+﻿@model Talenta.Controllers.ReportsViewModel
+
+@{
     ViewBag.Title = "Report";
 }
 
-<h2>Report</h2>
+@section scripts
+{
+    <script>
+        $(function() {
+            $('#vendorId').change(function () {
+                if ($(this).val())
+                    $('#frmReport').submit();
+            });
+        });
+    </script>
+}
+<br />
+<br />
+<br />
+<form id="frmReport" action="@Url.Action("Reports")" method="Get">
+    <div class="form-group">
+        <label>Vendor</label>
+        @Html.DropDownList("vendorId", new SelectList(Model.Vendors, "Id", "Name"), "Select Vendor", new {@class = "form-control"})
+
+    </div> 
+</form>
+
+@if (Model.PurchaseOrders != null)
+{
+    if (Model.PurchaseOrders.Any())
+    {
+        <table class="table">
+            <tr>
+                <th>Order #</th>
+                <th>Vendor</th>
+                <th>Order date</th>
+                <th>
+                    Order Amount
+                </th>
+            </tr>
+            @foreach (var order in Model.PurchaseOrders)
+            {
+                <tr>
+                    <td>@($"POR-{order.Id:0000}") </td>
+                    <td>@order.Vendor.Name</td>
+                    <td>@order.DateTime.ToShortDateString()</td>
+                    <td>
+                        @order.Subtotal.ToString("C")
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No orders for the selected vendor
+        </div>
+    }
+
+}
+

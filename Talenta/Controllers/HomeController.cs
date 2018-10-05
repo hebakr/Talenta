@@ -25,9 +25,15 @@ namespace Talenta.Controllers
         }
 
 
-        public ActionResult Reports()
+        public ActionResult Reports(int? vendorId)
         {
-            return View();
+            var db = new ApplicationDbContext();
+            var model = new ReportsViewModel {Vendors = db.Vendors.OrderBy(v => v.Name).ToList()};
+
+            if (vendorId.HasValue)
+                model.PurchaseOrders = db.PurchaseOrders.Where(po => po.VendorId == vendorId.Value).ToList();
+
+            return View(model);
         }
 
         public ActionResult CreateOrder()
@@ -70,5 +76,11 @@ namespace Talenta.Controllers
             return Json(new { sucess = true });
         }
 
+    }
+
+    public class ReportsViewModel
+    {
+        public List<Vendor> Vendors { get; set; }
+        public IList<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }
